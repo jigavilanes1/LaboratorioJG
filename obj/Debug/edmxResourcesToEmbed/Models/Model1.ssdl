@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_celularesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbl_celulares">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="modelo" Type="varchar" MaxLength="50" />
+    <Property Name="marca" Type="varchar" MaxLength="100" />
+    <Property Name="precio" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="idOperadora" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_operadora">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="anio" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_usuarios">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usuario" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="clave" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="estado" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tbl_operadora_idOperadora">
+    <End Role="tbl_operadora" Type="Self.tbl_operadora" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbl_celulares" Type="Self.tbl_celulares" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_operadora">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_celulares">
+        <PropertyRef Name="idOperadora" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="db_celularesModelStoreContainer">
+    <EntitySet Name="tbl_celulares" EntityType="Self.tbl_celulares" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_operadora" EntityType="Self.tbl_operadora" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_usuarios" EntityType="Self.tbl_usuarios" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tbl_operadora_idOperadora" Association="Self.FK_tbl_operadora_idOperadora">
+      <End Role="tbl_operadora" EntitySet="tbl_operadora" />
+      <End Role="tbl_celulares" EntitySet="tbl_celulares" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
