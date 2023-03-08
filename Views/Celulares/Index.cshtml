@@ -1,0 +1,40 @@
+﻿@model List<LaboratorioJG.Models.TableViewModels.CelularesTableViewModels>
+@{
+    ViewBag.Title = "Celulares";
+}
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-lg-6">
+        <table class="table table-striped">
+            <tr class="">
+                <th>ID</th>
+                <th>MODELO</th>
+                <th>MARCA</th>
+                <th>PRECIO</th>
+                <th>OPERADORA</th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var oCelular in Model)
+            {
+                <tr>
+                    <th>@oCelular.Id</th>
+                    <td>@oCelular.Modelo</td>
+                    <td>@oCelular.Marca</td>
+                    <td>@oCelular.Precio</td>
+                    <td>@oCelular.Operadora</td>
+                    <td>
+                        <button type="button" class="btn btn-info" onclick="document.location.href = '@Url.Content("~/Celulares/Editar/"+oCelular.Id)'">Editar</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" onclick="document.location.href = '@Url.Content("~/Celulares/Eliminar/"+oCelular.Id)'">Eliminar</button>
+                    </td>
+                </tr>
+            }
+        </table>
+        <div>
+            @Html.ActionLink("Nuevo", "Nuevo", "Celulares")
+        </div>
+    </div>
+</div>

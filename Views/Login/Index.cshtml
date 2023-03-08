@@ -1,0 +1,33 @@
+﻿@model LaboratorioJG.Models.ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-lg-12">
+        @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.LabelFor(d => d.Usuario)
+            @Html.TextBoxFor(d => d.Usuario, new { @class = "form-control" })
+            <div style="color: red;">
+                @Html.ValidationMessageFor(model => model.Usuario)
+            </div>
+            <br /><br />
+
+            @Html.LabelFor(d => d.Clave)
+            @Html.TextBoxFor(d => d.Clave, new { @class = "form-control" })
+            <div style="color: red;">
+                @Html.ValidationMessageFor(model => model.Clave)
+            </div>
+            <br /><br />
+            <div style="text-align: left;">
+                <input type="submit" class="btn btn-success" value=" Ingresar " />
+            </div>
+
+        }
+    </div>
+</div>

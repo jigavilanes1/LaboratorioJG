@@ -1,0 +1,38 @@
+﻿@model List<LaboratorioJG.Models.TableViewModels.OperadorasTableViewModels>
+@{
+    ViewBag.Title = "Operadora";
+}
+
+<h2>Operadora</h2>
+
+<div class="row">
+    <div class="col-lg-6">
+        <table class="table table-striped">
+            <tr class="">
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>ANIO</th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var oOperadora in Model)
+            {
+                <tr>
+                    <th>@oOperadora.Id</th>
+                    <td>@oOperadora.Nombre</td>
+                    <td>@oOperadora.Anio</td>
+                    <td>
+                        <button type="button" class="btn btn-info" onclick="document.location.href = '@Url.Content("~/Operadoras/Editar/"+oOperadora.Id)'">Editar</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" onclick="document.location.href = '@Url.Content("~/Operadoras/Eliminar/"+oOperadora.Id)'">Eliminar</button>
+                    </td>
+                </tr>
+            }
+        </table>
+        <div>
+            @Html.ActionLink("Nuevo", "Nuevo", "Operadoras")
+        </div>
+    </div>
+</div>
+
